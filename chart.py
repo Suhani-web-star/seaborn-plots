@@ -27,11 +27,12 @@ df = pd.DataFrame(data)
 # Visualization
 # -----------------------------
 sns.set_style("whitegrid")
-sns.set_context("talk")  # better readability
+sns.set_context("talk")
 
-plt.figure(figsize=(8, 8))  # 512x512 pixels at dpi=64
+# Ensure 512x512 pixels:
+# figsize in inches × dpi = final pixels
+plt.figure(figsize=(8, 8), dpi=64)
 
-# Barplot
 ax = sns.barplot(
     data=df,
     x="Product",
@@ -41,14 +42,11 @@ ax = sns.barplot(
     ci=None
 )
 
-# Titles and labels
 ax.set_title("Quarterly Sales Performance by Product", fontsize=18, pad=15)
 ax.set_xlabel("Product", fontsize=14)
 ax.set_ylabel("Sales (in units)", fontsize=14)
-
-# Legend
 ax.legend(title="Quarter", fontsize=12, title_fontsize=13)
 
-# Save as PNG
+# Force exact 512x512 output
 plt.savefig("chart.png", dpi=64, bbox_inches="tight")
 plt.close()
